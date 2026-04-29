@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo1.DashboardController"
+            style="-fx-background-color: #1a1a2e;">
+
+    <!-- ══ TOP BAR ══════════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              style="-fx-background-color: #16213e; -fx-padding: 14 24;
+                     -fx-border-color: #2d3748; -fx-border-width: 0 0 1 0;">
+            <Label text="🏦 BanqueRMI"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e2e8f0;"/>
+            <Label text="|" style="-fx-text-fill: #2d3748;"/>
+            <Label fx:id="userLabel" text="Connecté"
+                   style="-fx-font-size: 12px; -fx-text-fill: #718096;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="statusLabel" text=""
+                   style="-fx-font-size: 12px;"/>
+            <Button text="Déconnexion" onAction="#seDeconnecter"
+                    style="-fx-background-color: #2d3748; -fx-text-fill: #a0aec0;
+                           -fx-font-size: 11px; -fx-background-radius: 4;
+                           -fx-padding: 6 12; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <!-- ══ LEFT PANEL ═══════════════════════════════════════════ -->
+    <left>
+        <VBox spacing="6"
+              style="-fx-background-color: #16213e; -fx-padding: 20 12;
+                     -fx-border-color: #2d3748; -fx-border-width: 0 1 0 0;"
+              minWidth="190">
+
+            <Label text="OPÉRATIONS"
+                   style="-fx-font-size: 10px; -fx-font-weight: bold;
+                          -fx-text-fill: #4a5568; -fx-padding: 4 8;"/>
+
+            <!-- Champs communs -->
+            <VBox spacing="6" style="-fx-padding: 4 8;">
+                <TextField fx:id="compteField" promptText="N° Compte (ex: CPT001)"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: #e2e8f0;
+                                  -fx-prompt-text-fill: #4a5568; -fx-border-color: #2d3748;
+                                  -fx-border-radius: 4; -fx-background-radius: 4;
+                                  -fx-padding: 7 10; -fx-font-size: 12px;"/>
+                <TextField fx:id="montantField" promptText="Montant (DA)"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: #e2e8f0;
+                                  -fx-prompt-text-fill: #4a5568; -fx-border-color: #2d3748;
+                                  -fx-border-radius: 4; -fx-background-radius: 4;
+                                  -fx-padding: 7 10; -fx-font-size: 12px;"/>
+                <TextField fx:id="compteDestField" promptText="Compte dest. (virement)"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: #e2e8f0;
+                                  -fx-prompt-text-fill: #4a5568; -fx-border-color: #2d3748;
+                                  -fx-border-radius: 4; -fx-background-radius: 4;
+                                  -fx-padding: 7 10; -fx-font-size: 12px;"/>
+            </VBox>
+
+            <Separator style="-fx-background-color: #2d3748;"/>
+
+            <!-- Boutons opérations -->
+            <Button text="💰  Consulter Solde" onAction="#consulterSolde" maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #90cdf4;
+                           -fx-font-size: 12px; -fx-background-radius: 4;
+                           -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+            <Button text="➕  Déposer" onAction="#deposer" maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #9ae6b4;
+                           -fx-font-size: 12px; -fx-background-radius: 4;
+                           -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+            <Button text="➖  Retirer" onAction="#retirer" maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #feb2b2;
+                           -fx-font-size: 12px; -fx-background-radius: 4;
+                           -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+            <Button text="🔄  Virement" onAction="#effectuerVirement" maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #faf089;
+                           -fx-font-size: 12px; -fx-background-radius: 4;
+                           -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+            <Button text="📋  Historique" onAction="#voirHistorique" maxWidth="Infinity"
+                    style="-fx-background-color: #0f3460; -fx-text-fill: #d6bcfa;
+                           -fx-font-size: 12px; -fx-background-radius: 4;
+                           -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+
+
+            <Separator style="-fx-background-color: #2d3748;"/>
+            <Label text="ADMIN"
+                   style="-fx-font-size: 10px; -fx-font-weight: bold;
+                          -fx-text-fill: #4a5568; -fx-padding: 4 8;"/>
+
+            <!-- Champs admin -->
+            <VBox spacing="6" style="-fx-padding: 4 8;">
+                <TextField fx:id="titulaireField" promptText="Login titulaire"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: #e2e8f0;
+                                  -fx-prompt-text-fill: #4a5568; -fx-border-color: #2d3748;
+                                  -fx-border-radius: 4; -fx-background-radius: 4;
+                                  -fx-padding: 7 10; -fx-font-size: 12px;"/>
+                <TextField fx:id="soldeInitialField" promptText="Solde initial"
+                           style="-fx-background-color: #0f3460; -fx-text-fill: #e2e8f0;
+                                  -fx-prompt-text-fill: #4a5568; -fx-border-color: #2d3748;
+                                  -fx-border-radius: 4; -fx-background-radius: 4;
+                                  -fx-padding: 7 10; -fx-font-size: 12px;"/>
+                <Button fx:id="btnCreerCompte" text="📂  Créer Compte"
+                        onAction="#creerCompte" maxWidth="Infinity" style="-fx-font-size: 12px; -fx-background-radius: 4;
+            -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+
+                <Button fx:id="btnSupprimerCompte" text="🗑  Supprimer Compte"
+                        onAction="#supprimerCompte" maxWidth="Infinity" style="-fx-font-size: 12px; -fx-background-radius: 4;
+            -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+
+                <Button fx:id="btnListerComptes" text="📂  Lister Comptes"
+                        onAction="#listerComptes" maxWidth="Infinity" style="-fx-font-size: 12px; -fx-background-radius: 4;
+            -fx-padding: 8 12; -fx-cursor: hand; -fx-alignment: CENTER_LEFT;"/>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <!-- ══ CENTER ════════════════════════════════════════════════ -->
+    <center>
+        <VBox spacing="12" style="-fx-padding: 20;">
+
+            <!-- Solde -->
+            <HBox spacing="16" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #16213e; -fx-padding: 16 20;
+                         -fx-background-radius: 8;">
+                <VBox spacing="2">
+                    <Label text="SOLDE DU COMPTE"
+                           style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                  -fx-text-fill: #718096;"/>
+                    <Label fx:id="soldeLabel" text="— DA"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold;
+                                  -fx-text-fill: #68d391;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Tables -->
+            <HBox spacing="12" VBox.vgrow="ALWAYS">
+
+                <!-- Historique -->
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="HISTORIQUE DES TRANSACTIONS"
+                           style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                  -fx-text-fill: #718096;"/>
+                    <TableView fx:id="historiqueTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #16213e;
+                                      -fx-border-color: #2d3748; -fx-border-radius: 6;">
+                        <columns>
+                            <TableColumn fx:id="colHistorique" text="Transaction" minWidth="300"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Aucune transaction" style="-fx-text-fill: #4a5568;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <!-- Comptes -->
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="LISTE DES COMPTES"
+                           style="-fx-font-size: 10px; -fx-font-weight: bold;
+                                  -fx-text-fill: #718096;"/>
+                    <TableView fx:id="comptesTable" VBox.vgrow="ALWAYS"
+                               style="-fx-background-color: #16213e;
+                                      -fx-border-color: #2d3748; -fx-border-radius: 6;">
+                        <columns>
+                            <TableColumn fx:id="colComptes" text="Compte" minWidth="280"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Aucun compte" style="-fx-text-fill: #4a5568;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </HBox>
+
+            <!-- Log area -->
+            <VBox spacing="4">
+                <Label text="JOURNAL"
+                       style="-fx-font-size: 10px; -fx-font-weight: bold;
+                              -fx-text-fill: #718096;"/>
+                <TextArea fx:id="logArea" editable="false" prefHeight="110"
+                          style="-fx-background-color: #0f3460; -fx-text-fill: #a0aec0;
+                                 -fx-border-color: #2d3748; -fx-border-radius: 6;
+                                 -fx-background-radius: 6; -fx-font-size: 11px;
+                                 -fx-font-family: 'Consolas';"/>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>
