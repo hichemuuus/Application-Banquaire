@@ -1,4 +1,3 @@
-package com.example.demo1;  // ← ajouter cette ligne
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

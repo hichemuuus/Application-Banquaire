@@ -1,4 +1,3 @@
-package com.example.demo1;  // ← ajouter cette ligne
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

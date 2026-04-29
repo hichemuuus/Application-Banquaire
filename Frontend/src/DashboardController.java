@@ -1,4 +1,4 @@
-package com.example.demo1;
+
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -80,11 +80,8 @@ public class DashboardController implements Initializable {
 
         runAsync(() -> {
             try {
-                // 1. Récupérer les comptes de l'utilisateur connecté
-                List<String> mesComptes = service.getComptesUtilisateur(loginUtilisateur);
 
-                // 2. Vérifier que le compte demandé appartient bien à cet utilisateur
-                if (!mesComptes.contains(cpte)) {
+                if (!verifierAccesCompte(cpte)) {
                     Platform.runLater(() -> {
                         log(" Accès refusé : ce compte ne vous appartient pas.");
                         showStatus("Accès refusé.", false);
@@ -234,9 +231,8 @@ public class DashboardController implements Initializable {
 
         runAsync(() -> {
             try {
-                // Vérifier que le compte appartient à l'utilisateur
-                List<String> mesComptes = service.getComptesUtilisateur(loginUtilisateur);
-                if (!mesComptes.contains(cpte)) {
+
+                if (!verifierAccesCompte(cpte)) {
                     Platform.runLater(() -> {
                         log("✗ Accès refusé : ce compte ne vous appartient pas.");
                         showStatus("Accès refusé.", false);
@@ -402,5 +398,12 @@ public class DashboardController implements Initializable {
             soldeInitialField.setVisible(false);
             soldeInitialField.setManaged(false);
         }
+    }
+    private boolean verifierAccesCompte(String numeroCompte) throws RemoteException {
+        if ("ADMIN".equals(role)) {
+            return true; // Admin voit tout
+        }
+        List<String> mesComptes = service.getComptesUtilisateur(loginUtilisateur);
+        return mesComptes.contains(numeroCompte);
     }
 }

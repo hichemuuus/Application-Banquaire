@@ -1,0 +1,6 @@
+com\example\demo1\ClientRMI.class
+com\example\demo1\BanqueException.class
+com\example\demo1\TestApp.class
+com\example\demo1\IBanqueService.class
+com\example\demo1\LoginController.class
+com\example\demo1\DashboardController.class

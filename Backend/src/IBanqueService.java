@@ -1,4 +1,4 @@
-package com.example.demo1;  // ← ajouter cette ligne
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
